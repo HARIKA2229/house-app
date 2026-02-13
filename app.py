@@ -19,10 +19,10 @@ st.write("Enter the your dream house to predict price.")
 # ----------------------------------
 @st.cache_resource
 def load_artifacts():
-    with open("new_rfmodel_pkl", "rb") as f:
+    with open("new_rfmodel.pkl", "rb") as f:
         model = pickle.load(f)
 
-    with open("new_scalar_pkl", "rb") as f:
+    with open("new_scalar.pkl", "rb") as f:
         scaler = pickle.load(f)
 
     return model, scaler
@@ -60,6 +60,7 @@ if st.button("House price"):
 
 
     st.success(f"🏡 Predicted House price: **{int(prediction[0])}**")
+
 
 
 
