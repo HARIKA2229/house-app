@@ -12,6 +12,8 @@ st.set_page_config(
     layout="centered"
 ) 
 
+
+
 st.title("🏡 House Price Prediction")
 st.write("Enter the your dream house to predict price.")
 
@@ -61,6 +63,7 @@ if st.button("House price"):
 
 
     st.success(f"🏡 Predicted House price: **{int(prediction[0])}**")
+
 
 
 
