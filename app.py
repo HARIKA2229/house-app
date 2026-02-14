@@ -19,10 +19,10 @@ st.write("Enter the your dream house to predict price.")
 # ----------------------------------
 @st.cache_resource
 def load_artifacts():
-    with open("new_rf_model_pkl", "rb") as f:
+    with open("new_rf_model.pkl", "rb") as f:
         model = pickle.load(f)
 
-    with open("new_scalar_pkl", "rb") as f:
+    with open("new_scalar.pkl", "rb") as f:
         scaler = pickle.load(f)
 
     return model, scaler
@@ -33,13 +33,13 @@ model, scaler = load_artifacts()
 # Feature inputs
 # ----------------------------------
 feature_inputs = {
-    'Square_footage': st.number_input('Square_footage', min_value=503.00, value=1030),
+    'Square_footage': st.number_input('Square_footage', min_value=503, value=1030),
     'Num_Bedrooms': st.number_input('Num_Bedrooms', min_value=1, value=1),
-    'Num_Bathrooms': st.number_input('Citric Acid', min_value=0.0, value=0.0),
-    'Year_Built': st.number_input('Year_Built', min_value=0.0, value=1.9),
-    'Lot_Size': st.number_input('Lot_Size', min_value=0.0, value=0.076),
-    'Garage_Size': st.number_input('Garage_Size', min_value=0.0, value=11.0),
-    'tNeighborhood_Quality': st.number_input('Neighborhood_Quality', min_value=0.0, value=34.0),
+    'Num_Bathrooms': st.number_input('Num_Bathrooms', min_value=1, value=1),
+    'Year_Built': st.number_input('Year_Built', min_value=1950, value=1990),
+    'Lot_Size': st.number_input('Lot_Size', min_value=0.0, value=3.4),
+    'Garage_Size': st.number_input('Garage_Size', min_value=0.0, value=1.0),
+    'tNeighborhood_Quality': st.number_input('Neighborhood_Quality', min_value=1.0, value=8.0),
 }
 
 # Maintain correct feature order
@@ -60,6 +60,7 @@ if st.button("House price"):
 
 
     st.success(f"🏡 Predicted House price: **{int(prediction[0])}**")
+
 
 
 
