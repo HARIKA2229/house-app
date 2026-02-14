@@ -1,6 +1,9 @@
 import streamlit as st
 import numpy as np
 import pickle
+import os
+import base64
+from pathlib import Path
 
 
 # ----------------------------------
@@ -11,7 +14,30 @@ st.set_page_config(
     page_icon="🏡",
     layout="centered"
 ) 
+def set_bg(image_file):
+    img_path = Path(image_file)
 
+    # If image not found, stop and show error
+    if not img_path.exists():
+        st.error(f"❌ Background image not found: {image_file}")
+        st.stop()
+
+    encoded = base64.b64encode(img_path.read_bytes()).decode()
+
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background: url("data:image/jpg;base64,{encoded}") no-repeat center center fixed;
+            background-size: cover;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# ✅ Your image name here
+set_bg("house1.png") 
 
 
 st.title("🏡 House Price Prediction")
@@ -63,6 +89,7 @@ if st.button("House price"):
 
 
     st.success(f"🏡 Predicted House price: **{int(prediction[0])}**")
+
 
 
 
